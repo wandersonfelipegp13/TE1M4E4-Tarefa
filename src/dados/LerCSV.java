@@ -3,9 +3,9 @@ package dados;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class LerCSV {
+public abstract class LerCSV {
 
-	private int[] dimensoes(String caminho) {
+	private static int[] dimensoes(String caminho) {
 
 		int c[] = { -1, 0 };
 
@@ -31,7 +31,7 @@ public class LerCSV {
 		return c;
 	}
 
-	public double[][] mat(String caminho) {
+	public static double[][] mat(String caminho) {
 
 		int d[] = dimensoes(caminho);
 		int linhas = d[0];
@@ -66,15 +66,5 @@ public class LerCSV {
 		return v;
 
 	}
-
-	public static void main(String args[]) {
-		LerCSV t = new LerCSV();
-		double m[][] = t.mat("src/files/Tabela_Dados_Treinamento_M4_3.6_RNA.csv");
-
-		for (double[] ds : m) {
-			System.out.println(ds[0] + "," + ds[1] + "," + ds[2] + "," + ds[3]);
-		}
-
-	}
-
+	
 }
