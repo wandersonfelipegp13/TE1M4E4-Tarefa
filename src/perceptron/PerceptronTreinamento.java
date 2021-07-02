@@ -1,7 +1,5 @@
 package perceptron;
 
-import java.util.Iterator;
-
 import dados.LerCSV;
 
 public class PerceptronTreinamento {
@@ -19,27 +17,33 @@ public class PerceptronTreinamento {
 
 		LerCSV arq = new LerCSV();
 		double[][] dados = arq.mat("src/files/Tabela_Dados_Treinamento_M4_3.6_RNA.csv");
+		int linhas = arq.getLinhas();
+		int colunas = arq.getColunas();
 		
-		for (int i = 0; i < arq.getLinhas(); i++) {
-			for (int j = 0; j < arq.getColunas(); j++) {
-				System.out.print(dados[i][j] + ",");
+		// TODO add 1 para meus x
+		// Obter os dados de treinamento
+		// 1.0,-0.6508,0.1097,4.0009,-1.0000 (exemplo de x)
+		// theta (bias), P1, P2, P3 (P = propriedades físico-químicas)
+		// colunas + 1 pois adiciono 1 na posição 0 de x
+		double[][] x = new double[linhas][colunas + 1];
+		
+		for (int i = 0; i < linhas; i++) {
+			for (int j = 0; j < colunas + 1; j++) {
+				if(j == 0)
+					x[i][j] = 1;
+				else
+					x[i][j] = dados[i][j - 1];
+			}
+		}
+		
+		for (int i = 0; i < linhas; i++) {
+			for (int j = 0; j < colunas + 1; j++) {
+				System.out.print(x[i][j] + ",");
 			}
 			System.out.println();
 		}
 
-		// TODO add 1 para meus x
-		// Obter os dados de treinamento
-		// theta (bias), P1, P2, P3 (P = propriedades físico-químicas)
-		
-		// 1.0,-0.6508,0.1097,4.0009,-1.0000
-		
-		double[][] x = new double[1][1];
-		
 		/*
-		for (int i = 0; i < dados.length; i++) {
-			x[i]
-		}
-		*/
 
 		// OBS: a saida esperada ja vem com o x do jeito implementado
 		double[] d = { -1, 1, -1, -1, 1, 1 }; // saída esperada: -1 = maçã e 1 = laranja
@@ -85,7 +89,7 @@ public class PerceptronTreinamento {
 
 		for (int i = 0; i < e.length; i++)
 			System.out.print(e[i] + ", ");
-
+		*/
 	}
 
 }
