@@ -8,7 +8,9 @@ public class PerceptronAplicacao {
 	}
 	public static void main(String[] args) {
 		// Depois de treinada, a rede pode ser usada para classificar novas entradas
-		double [] w = {-369.99999999998755, 95.0000000000127, -1998.2200000004568};
+		// double [] w = {-369.99999999998755, 95.0000000000127, -1998.2200000004568};
+		double [] w = { -240.2800000000491, 11.640000000021278, -250.17200000021353 };
+		// 
 		//-370.      95.   -1998.22]
 		double [] entrada = {1, 110, 6.5};
 		//calcular

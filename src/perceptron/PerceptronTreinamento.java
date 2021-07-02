@@ -1,5 +1,7 @@
 package perceptron;
 
+// import dados.LerCSV;
+
 public class PerceptronTreinamento {
 	
 	static final int numEpocas = 100000;
@@ -12,6 +14,18 @@ public class PerceptronTreinamento {
 	}
 	
 	public static void main(String[] args) {
+		
+		/*
+		double[][] sola = LerCSV.mat("src/files/Tabela_Dados_Treinamento_M4_3.6_RNA.csv");
+		
+		for (int i = 0; i < 30; i++) {
+			for (int j = 0; j < 4; j++) {
+				System.out.print(sola[i][j] + ",");
+			}
+			System.out.println();
+		}
+		*/
+		
 		// Obter os dados de treinamento
 		double [][] x = { //theta (bias), peso, pH
 				{1, 113, 6.8},
