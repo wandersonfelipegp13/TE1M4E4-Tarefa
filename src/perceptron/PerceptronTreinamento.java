@@ -1,7 +1,5 @@
 package perceptron;
 
-import java.util.Iterator;
-
 import dados.LerCSV;
 
 /**
@@ -14,7 +12,7 @@ import dados.LerCSV;
 public class PerceptronTreinamento {
 
 	static final int numEpocas = 100000;
-	static final int numAmostras = 30;
+	static int numAmostras;
 
 	static double sinal(double u) {
 		if (u <= 0)
@@ -28,6 +26,7 @@ public class PerceptronTreinamento {
 		double[][] dados = arq.mat("src/files/Tabela_Dados_Treinamento_M4_3.6_RNA.csv");
 		int linhas = arq.getLinhas();
 		int colunas = arq.getColunas();
+		numAmostras = linhas;
 
 		// Obter os dados de treinamento
 		// 1.0,-0.6508,0.1097,4.0009,-1.0000 (exemplo de x)
@@ -45,7 +44,7 @@ public class PerceptronTreinamento {
 		}
 
 		// OBS: a saida esperada ja vem com o x do jeito implementado
-		double[] d = { -1, 1, -1, -1, 1, 1 }; // saída esperada: -1 = P1 e 1 = P2
+		// double[] d = { -1, 1, -1, -1, 1, 1 }; // saída esperada: -1 = P1 e 1 = P2
 		// (3) inicar os pesos w
 
 		// TODO fazer esses valores aleatórios
