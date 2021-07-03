@@ -1,6 +1,7 @@
 package perceptron;
 
 import dados.LerCSV;
+import java.util.Random;
 
 /**
  * Nessa versão a quantidade de registros de óleos, assim como a quantidade de
@@ -11,8 +12,9 @@ import dados.LerCSV;
  */
 public class PerceptronTreinamento {
 
-	static final int numEpocas = 100000;
-	static int numAmostras;
+	private static final int numEpocas = 100000;
+	private static int numAmostras;
+	private static Random gerador = new Random();
 
 	static double sinal(double u) {
 		if (u <= 0)
@@ -47,9 +49,17 @@ public class PerceptronTreinamento {
 		// double[] d = { -1, 1, -1, -1, 1, 1 }; // saída esperada: -1 = P1 e 1 = P2
 		// (3) inicar os pesos w
 
-		// TODO fazer esses valores aleatórios
-		double[] w = { 1, 1, 1, 1 }; // pode usar valores aleatórios
-
+		double[] w = new double[colunas];
+		
+		for (int i = 0; i < colunas; i++) {
+						
+			if(gerador.nextDouble() >= 0.5)
+				w[i] = 1;
+			else 
+				w[i] = 0;
+			
+		}
+			
 		// (4) taxa aprendizagem
 		double eta = 0.01;
 		// (5) iniciar o erro
