@@ -21,7 +21,7 @@ public class PerceptronTreinamento {
 		return 1;
 	}
 
-	public static void main(String[] args) {
+	public static double[] main(String[] args) {
 
 		LerCSV arq = new LerCSV();
 		double[][] dados = arq.mat("src/files/Tabela_Dados_Treinamento_M4_3.6_RNA.csv");
@@ -130,6 +130,9 @@ public class PerceptronTreinamento {
 			System.out.print(e[i] + ", ");
 
 		System.out.println("\nÉpocas: " + numEpocas);
+		
+		// Quando a Aplicação chamar o main dessa classe ela irá retor os w
+		return w;	
 
 	}
 
