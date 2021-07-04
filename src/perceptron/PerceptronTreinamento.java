@@ -59,6 +59,7 @@ public class PerceptronTreinamento {
 				w[i] = 1;
 			else
 				w[i] = 0;
+			
 		}
 
 		// Taxa aprendizagem
