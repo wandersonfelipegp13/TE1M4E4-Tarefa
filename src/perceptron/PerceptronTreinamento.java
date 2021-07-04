@@ -27,12 +27,11 @@ public class PerceptronTreinamento {
 		double[][] dados = arq.mat("src/files/Tabela_Dados_Treinamento_M4_3.6_RNA.csv");
 		int linhas = arq.getLinhas();
 		int colunas = arq.getColunas();
-		numAmostras = linhas;
 
 		// Obter os dados de treinamento
 		// 1.0,-0.6508,0.1097,4.0009,-1.0000 (exemplo de x)
 		// theta (bias), p1, p2, p3 (p = propriedade físico-química), d
-		// colunas + 1 pois adiciono 1 na posição 0 de x
+		// colunas + 1 pois adiciono 1 na posição [0] de cada x
 		double[][] x = new double[linhas][colunas + 1];
 
 		for (int i = 0; i < linhas; i++) {
@@ -44,10 +43,12 @@ public class PerceptronTreinamento {
 			}
 		}
 
-		// OBS: a saida esperada ja vem com o x do jeito implementado
-		// double[] d = { -1, 1, -1, -1, 1, 1 }; // saída esperada: -1 = P1 e 1 = P2
+		/**
+		 * OBS: a saída esperada já vem com o x, pois está no arquivo junto com as
+		 * propriedades do óleo. Saída esperada: -1 = P1 e 1 = P2.
+		 */
 
-		// (3) inicar os pesos w
+		// Inicar os pesos w
 		double[] w = new double[colunas];
 
 		for (int i = 0; i < colunas; i++) {
@@ -58,31 +59,26 @@ public class PerceptronTreinamento {
 				w[i] = 1;
 			else
 				w[i] = 0;
-			/**/
 		}
 
-		// (4) taxa aprendizagem
+		// Taxa aprendizagem
 		double eta = 0.01;
-		// (5) iniciar o erro
+		
+		// Iniciar o erro
 		double[] e = new double[linhas];
 		for (int i = 0; i < e.length; i++)
 			e[i] = 0;
 
 		// Iniciar o contador de épocas com 0
 		numEpocas = 0;
-
 		double u = 0;
 		double yr = 0;
-
 		int amostra;
-
 		int erro = 1;
-		// for (int epoca = 0; epoca < numEpocas; epoca++) {
-		// do {
+
 		while (erro == 1) {
 
-			// Erro = inexiste (0)
-			erro = 0;
+			erro = 0; // Erro = inexiste (0)
 
 			// Para todas amostras treinar:
 			for (amostra = 0; amostra < x.length; amostra++) {
@@ -100,8 +96,8 @@ public class PerceptronTreinamento {
 				 * se y == d(k). Isso garante que todos os valores dos erros sejam atualizados,
 				 * já que quando eles fican dentro do if abaixo, na primeira vez que o erro não
 				 * existe, os valores do erro não são calculados, e assim, nao são atualizados
-				 * no vetor 'e' para 0, que é o resultado que se espera.
-				 * Uso colunas considerando que sempre o d vai estar na última posição do x.
+				 * no vetor 'e' para 0, que é o resultado que se espera. Uso colunas
+				 * considerando que sempre o d vai estar na última posição do x.
 				 */
 				e[amostra] = x[amostra][colunas] - yr;
 
@@ -120,8 +116,8 @@ public class PerceptronTreinamento {
 
 			numEpocas++;
 
-			// } while (erro == 1);
 		}
+		
 		// saída
 		System.out.println("pesos w: ");
 
