@@ -13,7 +13,6 @@ import java.util.Random;
 public class PerceptronTreinamento {
 
 	private static int numEpocas;
-	private static int numAmostras;
 	private static Random gerador = new Random();
 
 	static double sinal(double u) {
