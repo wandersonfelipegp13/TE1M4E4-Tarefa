@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class PerceptronTreinamento {
 
-	private static final int numEpocas = 100000;
+	private static int numEpocas;
 	private static int numAmostras;
 	private static Random gerador = new Random();
 
@@ -47,19 +47,21 @@ public class PerceptronTreinamento {
 
 		// OBS: a saida esperada ja vem com o x do jeito implementado
 		// double[] d = { -1, 1, -1, -1, 1, 1 }; // saída esperada: -1 = P1 e 1 = P2
-		// (3) inicar os pesos w
 
+		// (3) inicar os pesos w
 		double[] w = new double[colunas];
-		
+
 		for (int i = 0; i < colunas; i++) {
-						
-			if(gerador.nextDouble() >= 0.5)
+
+			// w[i] = gerador.nextDouble();
+
+			if (gerador.nextDouble() >= 0.5)
 				w[i] = 1;
-			else 
+			else
 				w[i] = 0;
-			
+			/**/
 		}
-			
+
 		// (4) taxa aprendizagem
 		double eta = 0.01;
 		// (5) iniciar o erro
@@ -67,14 +69,24 @@ public class PerceptronTreinamento {
 		for (int i = 0; i < e.length; i++)
 			e[i] = 0;
 
+		// Iniciar o contador de épocas com 0
+		numEpocas = 0;
+
 		double u = 0;
 		double yr = 0;
-		// (6) repetir número de épocas
-		for (int epoca = 0; epoca < numEpocas; epoca++) {
+
+		int amostra;
+
+		int erro = 1;
+		// for (int epoca = 0; epoca < numEpocas; epoca++) {
+		// do {
+		while (erro == 1) {
+
+			// Erro = inexiste (0)
+			erro = 0;
 
 			// Para todas amostras treinar:
-			// x.length - 1 pois a ultima coluna é o d
-			for (int amostra = 0; amostra < x.length - 1; amostra++) {
+			for (amostra = 0; amostra < x.length; amostra++) {
 
 				u = 0; // somatória
 
@@ -83,15 +95,33 @@ public class PerceptronTreinamento {
 
 				// calcular o yr pela função de ativação - função sinal ou degrau bipolar
 				yr = sinal(u);
-				// calcular o erro
-				// e[amostra] = d[amostra] - yr;
-				// colunas - 1 considerando que sempre o d vai estar na última posição do x  
+
+				/**
+				 * Quando esse bloco de código fica fora do if abaixo o erro é calculado mesmo
+				 * se y == d(k). Isso garante que todos os valores dos erros sejam atualizados,
+				 * já que quando eles fican dentro do if abaixo, na primeira vez que o erro não
+				 * existe, os valores do erro não são calculados, e assim, nao são atualizados
+				 * no vetor 'e' para 0, que é o resultado que se espera.
+				 * Uso colunas considerando que sempre o d vai estar na última posição do x.
+				 */
 				e[amostra] = x[amostra][colunas] - yr;
-				// ajuste dos pesos
-				for (int i = 0; i < w.length; i++)
-					w[i] = w[i] + eta * e[amostra] * x[amostra][i];
+
+				// Se y != d(k)
+				if (x[amostra][colunas] != yr) {
+
+					// ajuste dos pesos
+					for (int i = 0; i < w.length; i++)
+						w[i] = w[i] + eta * e[amostra] * x[amostra][i];
+
+					erro = 1; // erro = existe (1)
+					break;
+				}
 
 			}
+
+			numEpocas++;
+
+			// } while (erro == 1);
 		}
 		// saída
 		System.out.println("pesos w: ");
@@ -103,6 +133,8 @@ public class PerceptronTreinamento {
 
 		for (int i = 0; i < e.length; i++)
 			System.out.print(e[i] + ", ");
+
+		System.out.println("\nÉpocas: " + numEpocas);
 
 	}
 
