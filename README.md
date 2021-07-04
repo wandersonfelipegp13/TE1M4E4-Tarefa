@@ -12,7 +12,7 @@ Assim, baseado nas informações coletadas do processo, formou-se o conjunto de 
 apresentado no arquivo anexado, tomando por convenção o valor -1 para óleo pertencente à classe
 P1 e o valor 1 para óleo pertencente à classe P2.
 
-![algoritmo do perceptron](https://raw.githubusercontent.com/wandersonfelipegp13/TE1M4E4-Tarefa/tree/master/src/info/algoritmo.png)
+![algoritmo do perceptron](https://raw.githubusercontent.com/wandersonfelipegp13/TE1M4E4-Tarefa/master/src/info/algoritmo.png)
 
 Utilizando o algoritmo de treinamento mostrado na figura anterior, com taxa de aprendizagem como
 0,01, faça as seguintes atividades:
@@ -39,6 +39,7 @@ das saídas (classes) referentes aos cinco processos de treinamento realizados n
 |    8    | -0,6920 |  0,9404 | 4,4058 |        |        |        |        |        |
 |    9    | -1,3970 |  0,7141 | 4,9263 |        |        |        |        |        |
 |    10   | -1,8842 | -0,2805 | 1,2548 |        |        |        |        |        |
+
 *Tabela 1: Amostras de óleo para validar a rede Perceptron (ver arquivo anexo)*
 
 4. Explique por que o número de épocas de treinamento, em relação a esta aplicação, varia a cada
@@ -46,5 +47,3 @@ vez que executamos o treinamento do perceptron.
 
 5. Para a aplicação em questão, discorra se é possível afirmar se as suas classes são linearmente
 separáveis.
-
-
