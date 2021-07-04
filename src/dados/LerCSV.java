@@ -5,8 +5,13 @@ import java.io.FileReader;
 
 public class LerCSV {
 	
-	private static int linhas = -1;
+	private static int linhas;
 	private static int colunas;
+	
+	public LerCSV() {
+		linhas = 0;
+		colunas = 0;
+	}
 
 	private void dimensoes(String caminho) {
 
@@ -22,6 +27,8 @@ public class LerCSV {
 				linhas++;
 				linha = in.readLine();
 			}
+			
+			linhas--;
 
 			in.close();
 
